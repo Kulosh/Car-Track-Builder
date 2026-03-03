@@ -17,7 +17,9 @@
 
 #grid {
     display: grid;
-    grid-template-columns: repeat(20, 40px);
-    grid-template-rows: repeat(20, 40px);
+    grid-template-columns: repeat(20, 1fr);
+    grid-template-rows: repeat(20, 1fr);
     gap: 1px;
+    height: 40rem;
+    width: 40rem;
 }
