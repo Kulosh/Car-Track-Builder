@@ -1,0 +1,23 @@
+.grid-field {
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+.grass {
+    background-color: green;
+}
+
+.road {
+    background-color: slategray;
+}
+
+.water {
+    background-color: dodgerblue;
+}
+
+#grid {
+    display: grid;
+    grid-template-columns: repeat(20, 40px);
+    grid-template-rows: repeat(20, 40px);
+    gap: 1px;
+}
