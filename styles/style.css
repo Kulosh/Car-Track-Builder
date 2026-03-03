@@ -1,0 +1,44 @@
+@import './index.css';
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.col {
+    display: flex;
+    flex-direction: column;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+nav button {
+    margin: 10px;
+    height: 70%;
+    width: 10%;
+}
+
+header {
+    height: 5vh;
+    background-color: #333;
+    color: white;
+}
+
+main {
+    height: 95vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
