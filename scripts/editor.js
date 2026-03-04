@@ -1,6 +1,13 @@
 const gridDiv = document.querySelector('#grid');
 const terrains = ['grass', 'road', 'water'];
 let mapModel = createEmptyModel();
+const trackName = document.querySelector('#track-name');
+const saveBtn = document.querySelector('#save-track');
+let counter = parseInt(localStorage.getItem('ctbCounter')) || 0;
+
+if (counter === 0) {
+    localStorage.setItem('ctbCounter', counter.toString());
+}
 
 renderGridFromModel(mapModel);
 
@@ -68,3 +75,10 @@ function applyFieldClass(fieldEl, tile) {
     else if (tile === 'road') fieldEl.classList.add('road');
     else if (tile === 'water') fieldEl.classList.add('water');
 }
+
+saveBtn.addEventListener('click', () => {
+    localStorage.setItem('ctbCounter', counter.toString());
+    localStorage.setItem(`ctbName-${counter}`, (trackName.innerText).toString());
+    localStorage.setItem(`ctbMap-${counter}`, JSON.stringify(mapModel));
+    counter++;
+})
