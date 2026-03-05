@@ -1,15 +1,48 @@
 const gridDiv = document.querySelector('#grid');
-const terrains = ['grass', 'road', 'water'];
-let mapModel = createEmptyModel();
 const trackName = document.querySelector('#track-name');
 const saveBtn = document.querySelector('#save-track');
-let counter = parseInt(localStorage.getItem('ctbCounter')) || 0;
-
-if (counter === 0) {
-    localStorage.setItem('ctbCounter', counter.toString());
-}
+const trackSelect = document.querySelector('#track-select');
+const loadBtn = document.querySelector('#load-track');
+const terrains = ['grass', 'road', 'water'];
+let mapModel = createEmptyModel();
+let counter = initCounter();
 
 renderGridFromModel(mapModel);
+
+const defOpt = document.createElement('option');
+defOpt.value = '0';
+defOpt.innerText = "Select a track";
+defOpt.disabled = true;
+defOpt.selected = true;
+trackSelect.appendChild(defOpt);
+
+if (counter > 1) {
+    const optFrag = document.createDocumentFragment();
+    for (let i = 1; i < counter; i++) {
+        const opt = document.createElement('option');
+        opt.value = i.toString();
+        opt.innerText = localStorage.getItem(`ctbName-${i}`);
+        optFrag.appendChild(opt);
+    }
+
+    trackSelect.appendChild(optFrag);
+}
+
+function initCounter() {
+    if (localStorage.getItem('ctbCounter') === null) {
+        localStorage.setItem('ctbCounter', '1');
+        return 1;
+    } else {
+        return parseInt(localStorage.getItem('ctbCounter'));
+    }
+}
+
+loadBtn.addEventListener('click', () => {
+    if (trackSelect.value !== "0") {
+        mapModel = JSON.parse(localStorage.getItem(`ctbMap-${trackSelect.value}`));
+        renderGridFromModel(mapModel);
+    }
+})
 
 gridDiv.addEventListener('click', (e) => {
     const selectedField = e.target.closest('.grid-field');
@@ -77,8 +110,8 @@ function applyFieldClass(fieldEl, tile) {
 }
 
 saveBtn.addEventListener('click', () => {
-    localStorage.setItem('ctbCounter', counter.toString());
-    localStorage.setItem(`ctbName-${counter}`, (trackName.innerText).toString());
+    localStorage.setItem(`ctbName-${counter}`, (trackName.value).toString());
     localStorage.setItem(`ctbMap-${counter}`, JSON.stringify(mapModel));
     counter++;
+    localStorage.setItem('ctbCounter', counter.toString());
 })
