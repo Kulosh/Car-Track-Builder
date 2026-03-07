@@ -46,6 +46,7 @@ loadBtn.addEventListener('click', () => {
         mapModel = JSON.parse(localStorage.getItem(`ctbMap-${trackSelect.value}`));
         renderGridFromModel(mapModel);
         trackName.value = localStorage.getItem(`ctbName-${trackSelect.value}`);
+        trackName.readOnly = true;
         editing = true;
     }
 })
@@ -136,4 +137,5 @@ clearBtn.addEventListener('click', () => {
     renderGridFromModel(mapModel);
     editing = false;
     trackName.value = "";
+    trackName.readOnly = false;
 })
