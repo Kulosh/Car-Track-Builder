@@ -17,7 +17,22 @@
 
 #grid {
     display: grid;
-    grid-template-columns: repeat(20, 40px);
-    grid-template-rows: repeat(20, 40px);
+    grid-template-columns: repeat(20, 5%);
+    grid-template-rows: repeat(20, 5%);
     gap: 1px;
+    height: 30vw;
+    width: 30vw;
+}
+
+#editor-controls {
+    gap: 10px;
+}
+
+#editor {
+    gap: 10px;
+}
+
+#editor > div:first-of-type {
+    justify-content: start;
+    width: 20%;
 }
