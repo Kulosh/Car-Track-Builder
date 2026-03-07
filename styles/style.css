@@ -42,4 +42,5 @@ main {
     display: flex;
     justify-content: center;
     align-items: center;
+    background: linear-gradient(47deg,rgba(59, 59, 59, 1) 7%, rgba(3, 44, 156, 1) 50%, rgba(0, 176, 15, 1) 100%);
 }
