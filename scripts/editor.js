@@ -6,6 +6,7 @@ const loadBtn = document.querySelector('#load-track');
 const terrains = ['grass', 'road', 'water'];
 let mapModel = createEmptyModel();
 let counter = initCounter();
+let editing= false;
 
 renderGridFromModel(mapModel);
 
@@ -28,6 +29,8 @@ if (counter > 1) {
     trackSelect.appendChild(optFrag);
 }
 
+// Counter initialization
+
 function initCounter() {
     if (localStorage.getItem('ctbCounter') === null) {
         localStorage.setItem('ctbCounter', '1');
@@ -41,6 +44,8 @@ loadBtn.addEventListener('click', () => {
     if (trackSelect.value !== "0") {
         mapModel = JSON.parse(localStorage.getItem(`ctbMap-${trackSelect.value}`));
         renderGridFromModel(mapModel);
+        trackName.value = localStorage.getItem(`ctbName-${trackSelect.value}`);
+        editing = true;
     }
 })
 
@@ -110,8 +115,17 @@ function applyFieldClass(fieldEl, tile) {
 }
 
 saveBtn.addEventListener('click', () => {
-    localStorage.setItem(`ctbName-${counter}`, (trackName.value).toString());
-    localStorage.setItem(`ctbMap-${counter}`, JSON.stringify(mapModel));
-    counter++;
-    localStorage.setItem('ctbCounter', counter.toString());
+    if (trackName.value === "") return;
+    if (editing) {
+        localStorage.setItem(`ctbName-${trackSelect.value}`, (trackName.value).toString());
+        localStorage.setItem(`ctbMap-${trackSelect.value}`, JSON.stringify(mapModel));
+        localStorage.setItem('ctbCounter', counter.toString());
+        window.location.reload();
+    } else {
+        localStorage.setItem(`ctbName-${counter}`, (trackName.value).toString());
+        localStorage.setItem(`ctbMap-${counter}`, JSON.stringify(mapModel));
+        counter++;
+        localStorage.setItem('ctbCounter', counter.toString());
+        window.location.reload();
+    }
 })
