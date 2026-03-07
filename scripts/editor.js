@@ -3,6 +3,7 @@ const trackName = document.querySelector('#track-name');
 const saveBtn = document.querySelector('#save-track');
 const trackSelect = document.querySelector('#track-select');
 const loadBtn = document.querySelector('#load-track');
+const clearBtn = document.querySelector('#clear-track');
 const terrains = ['grass', 'road', 'water'];
 let mapModel = createEmptyModel();
 let counter = initCounter();
@@ -128,4 +129,11 @@ saveBtn.addEventListener('click', () => {
         localStorage.setItem('ctbCounter', counter.toString());
         window.location.reload();
     }
+})
+
+clearBtn.addEventListener('click', () => {
+    mapModel = createEmptyModel();
+    renderGridFromModel(mapModel);
+    editing = false;
+    trackName.value = "";
 })
